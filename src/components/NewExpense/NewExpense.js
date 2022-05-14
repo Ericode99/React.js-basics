@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // This is required to use the useState function
 
 import ExpenseForm from "./ExpenseForm";
-import "./NewExpense.css";
+import classes from "./NewExpense.module.css";
 
 function NewExpense(props) {
   const [isEditing, setIsEditing] = useState(false);
@@ -26,7 +26,7 @@ function NewExpense(props) {
   };
 
   return (
-    <div className="new-expense">
+    <div className={classes.new}>
       {!isEditing && (
         <button onClick={startEditingHandler}>Add New Expense</button>
       )}

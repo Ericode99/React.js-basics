@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ErrorModal from "../UI/ErrorModal";
-import "./ExpenseForm.css";
+import classes from "./ExpenseForm.module.css";
 
 function ExpenseForm(props) {
   const [enteredTitle, setEnteredTitle] = useState("");
@@ -100,8 +100,8 @@ function ExpenseForm(props) {
         />
       )}
       <form onSubmit={submitHandler}>
-        <div className="new-expense__controls">
-          <div className="new-expense__control">
+        <div className={classes.controls}>
+          <div className={classes.control}>
             <label>Title</label>
             <input
               type="text"
@@ -109,7 +109,7 @@ function ExpenseForm(props) {
               onChange={titleChangeHandler}
             />
           </div>
-          <div className="new-expense__control">
+          <div className={classes.control}>
             <label>Amount</label>
             <input
               type="number"
@@ -119,7 +119,7 @@ function ExpenseForm(props) {
               onChange={amountChangeHandler}
             />
           </div>
-          <div className="new-expense__control">
+          <div className={classes.control}>
             <label>Date</label>
             <input
               type="date"
@@ -130,7 +130,7 @@ function ExpenseForm(props) {
             />
           </div>
         </div>
-        <div className="new-expense__actions">
+        <div className={classes.actions}>
           <button type="button" onClick={props.onCancel}>
             Cancel
           </button>
