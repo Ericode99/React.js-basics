@@ -9,14 +9,22 @@ const ExpensesList = (props) => {
 
   return (
     <ul className="expenses-list">
-      {props.items.map((expense) => (
-        <ExpenseItem
-          key={expense.id}
-          title={expense.title}
-          amount={expense.amount}
-          date={expense.date}
-        />
-      ))}
+      {props.items
+        .sort(function (a, b) {
+          let c = new Date(a.date);
+          let d = new Date(b.date);
+          return d - c;
+        })
+        .map((expense) => (
+          <ExpenseItem
+            key={expense.id}
+            id={expense.id}
+            title={expense.title}
+            amount={expense.amount}
+            date={expense.date}
+            onDelete={props.onDeleteItem}
+          />
+        ))}
     </ul>
   );
 };

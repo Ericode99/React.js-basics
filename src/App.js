@@ -6,7 +6,7 @@ import Expenses from "./components/Expenses/Expenses";
 const DUMMY_EXPENSES = [
   {
     id: "e1",
-    title: "Toilet Paper",
+    title: "Phone Bill",
     amount: 94.12,
     date: new Date(2020, 7, 14),
   },
@@ -48,14 +48,22 @@ function App() {
 
   const addExpenseHandler = (expense) => {
     setExpenses((prevExpenses) => {
-      return [expense, ...prevExpenses];
+      const updatedExpenses = [expense, ...prevExpenses];
+      return updatedExpenses;
+    });
+  };
+
+  const deleteItemHandler = (itemId) => {
+    setExpenses((prevExpenses) => {
+      const updatedExpenses = prevExpenses.filter((item) => item.id !== itemId);
+      return updatedExpenses;
     });
   };
 
   return (
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses items={expenses} />
+      <Expenses items={expenses} onDeleteItemMain={deleteItemHandler} />
     </div>
   );
 }

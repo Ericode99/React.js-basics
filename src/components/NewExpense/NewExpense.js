@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+// This is required to use the useState function
 
 import ExpenseForm from "./ExpenseForm";
 import "./NewExpense.css";
 
 function NewExpense(props) {
   const [isEditing, setIsEditing] = useState(false);
+  // Hooks must be called inside component functions and not in functions inside component functions
 
   const saveExpenseDataHandler = (enteredExpenseData) => {
     const expneseData = {
