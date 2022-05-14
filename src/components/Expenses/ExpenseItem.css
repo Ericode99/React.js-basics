@@ -1,3 +1,9 @@
+/* 
+#0b7285
+#66d9e8
+#c5f6fa
+*/
+
 .expense-item {
   display: flex;
   justify-content: space-between;
@@ -22,15 +28,15 @@
   font-size: 1rem;
   flex: 1;
   margin: 0 1rem;
-  color: white;
+  color: #fff;
 }
 
 .expense-item__price {
   font-size: 1rem;
   font-weight: bold;
-  color: white;
-  background-color: #40005d;
-  border: 1px solid white;
+  color: #fff;
+  background-color: #0b7285;
+  border: 1px solid #fff;
   padding: 0.5rem;
   border-radius: 12px;
 }

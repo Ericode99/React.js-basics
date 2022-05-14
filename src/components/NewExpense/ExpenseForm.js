@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import ErrorModal from "../UI/ErrorModal";
 import "./ExpenseForm.css";
 
 function ExpenseForm(props) {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
+  const [error, setError] = useState("");
 
   // Alternative variant to update the state useing only one state
   // const [userInput, setUserInput] = useState({
@@ -45,8 +47,32 @@ function ExpenseForm(props) {
     // });
   };
 
+  const errorHandler = (error) => {
+    if (error === "title") {
+    }
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
+
+    if (enteredTitle.length === 0) {
+      setError({ title: "Invalid Title", message: "Please enter a title" });
+      return;
+    }
+    if (enteredAmount.length === 0) {
+      setError({
+        title: "Invalid Amount",
+        message: "Please enter an amount in USD",
+      });
+      return;
+    }
+    if (enteredDate.length === 0) {
+      setError({
+        title: "Invalid Date",
+        message: "Please enter a valid date",
+      });
+      return;
+    }
 
     const expenseData = {
       title: enteredTitle,
@@ -60,45 +86,58 @@ function ExpenseForm(props) {
     setEnteredDate("");
   };
 
+  const clearError = () => {
+    setError("");
+  };
+
   return (
-    <form onSubmit={submitHandler}>
-      <div className="new-expense__controls">
-        <div className="new-expense__control">
-          <label>Title</label>
-          <input
-            type="text"
-            value={enteredTitle}
-            onChange={titleChangeHandler}
-          />
+    <div>
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={clearError}
+        />
+      )}
+      <form onSubmit={submitHandler}>
+        <div className="new-expense__controls">
+          <div className="new-expense__control">
+            <label>Title</label>
+            <input
+              type="text"
+              value={enteredTitle}
+              onChange={titleChangeHandler}
+            />
+          </div>
+          <div className="new-expense__control">
+            <label>Amount</label>
+            <input
+              type="number"
+              value={enteredAmount}
+              min="0.01"
+              step="0.01"
+              onChange={amountChangeHandler}
+            />
+          </div>
+          <div className="new-expense__control">
+            <label>Date</label>
+            <input
+              type="date"
+              value={enteredDate}
+              min="2019-01-01"
+              max="2022-12-31"
+              onChange={dateChangeHandler}
+            />
+          </div>
         </div>
-        <div className="new-expense__control">
-          <label>Amount</label>
-          <input
-            type="number"
-            value={enteredAmount}
-            min="0.01"
-            step="0.01"
-            onChange={amountChangeHandler}
-          />
+        <div className="new-expense__actions">
+          <button type="button" onClick={props.onCancel}>
+            Cancel
+          </button>
+          <button type="submit">Add Expense</button>
         </div>
-        <div className="new-expense__control">
-          <label>Date</label>
-          <input
-            type="date"
-            value={enteredDate}
-            min="2019-01-01"
-            max="2022-12-31"
-            onChange={dateChangeHandler}
-          />
-        </div>
-      </div>
-      <div className="new-expense__actions">
-        <button type="button" onClick={props.onCancel}>
-          Cancel
-        </button>
-        <button type="submit">Add Expense</button>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }
 
