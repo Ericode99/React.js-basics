@@ -47,11 +47,6 @@ function ExpenseForm(props) {
     // });
   };
 
-  const errorHandler = (error) => {
-    if (error === "title") {
-    }
-  };
-
   const submitHandler = (event) => {
     event.preventDefault();
 
